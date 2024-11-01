@@ -5,7 +5,7 @@ using Questao5.Infrastructure.Sqlite;
 
 namespace Questao5.Application.Handlers
 {
-    public class SaldoContaCorrenteHandler : IRequestHandler<ConsultaSaldoContaCorrenteQuery, IResult>
+    public class SaldoContaCorrenteHandler : IRequestHandler<ConsultarSaldoContaCorrenteQuery, IResult>
     {
         private readonly IMediator _mediator;
         private readonly IDatabaseBootstrap _databaseBootstrap;
@@ -16,7 +16,7 @@ namespace Questao5.Application.Handlers
             _databaseBootstrap = databaseBootstrap;
         }
 
-        public async Task<IResult> Handle(ConsultaSaldoContaCorrenteQuery request, CancellationToken cancellationToken)
+        public async Task<IResult> Handle(ConsultarSaldoContaCorrenteQuery request, CancellationToken cancellationToken)
         {
             try
             {

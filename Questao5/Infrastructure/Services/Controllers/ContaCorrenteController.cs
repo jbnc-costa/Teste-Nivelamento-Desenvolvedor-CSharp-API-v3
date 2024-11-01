@@ -40,7 +40,7 @@ namespace Questao5.Infrastructure.Services.Controllers
         //[Idempotent(ExpireHours = 48)]
         public async Task<IActionResult> SaldoContaCorrente([FromQuery] int conta)
         {
-            var query = new ConsultaSaldoContaCorrenteQuery(conta);
+            var query = new ConsultarSaldoContaCorrenteQuery(conta);
 
             var response = await _mediator.Send(query);
 
