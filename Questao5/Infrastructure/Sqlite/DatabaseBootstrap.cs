@@ -78,7 +78,7 @@ namespace Questao5.Infrastructure.Sqlite
             using var connection = new SqliteConnection(databaseConfig.Name);
 
             var listaMovimentacao = connection.Query<Movimentacao>("Select * from movimento where idcontacorrente = @idcontacorrente order by datamovimento",
-                new { idcontacorrente = idcontacorrente }).ToList();
+                new { idcontacorrente }).ToList();
 
             return listaMovimentacao;
         }

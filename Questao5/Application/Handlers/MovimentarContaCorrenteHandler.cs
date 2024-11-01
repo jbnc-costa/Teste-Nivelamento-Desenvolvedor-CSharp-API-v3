@@ -7,12 +7,10 @@ namespace Questao5.Application.Handlers
 {
     public class MovimentarContaCorrenteHandler : IRequestHandler<MovimentarContaCorrenteCommand, IResult>
     {
-        private readonly IMediator _mediator;
         private readonly IDatabaseBootstrap _databaseBootstrap;
 
-        public MovimentarContaCorrenteHandler(IMediator mediator, IDatabaseBootstrap databaseBootstrap)
+        public MovimentarContaCorrenteHandler(IDatabaseBootstrap databaseBootstrap)
         {
-            _mediator = mediator;
             _databaseBootstrap = databaseBootstrap;
         }
 
@@ -22,12 +20,12 @@ namespace Questao5.Application.Handlers
             {
                 if (request.Valor < 0)
                 {
-                    return Results.Content("INVALID_VALUE");
+                    return Results.Content("INVALID_VALUE", "text/plain");
                 }
 
-                if (request.TipoMovimento != "C" || request.TipoMovimento != "D")
+                if (request.TipoMovimento != "C" && request.TipoMovimento != "D")
                 {
-                    return Results.Content("INVALID_TYPE");
+                    return Results.Content("INVALID_TYPE", "text/plain");
                 }
 
                 var contaCorrente = _databaseBootstrap.ConsultarContaCorrente(request.NumeroContaCorrente);
@@ -38,7 +36,7 @@ namespace Questao5.Application.Handlers
                 {
                     if (contaCorrente[0].Ativo != true)
                     {
-                        return Results.Content("INACTIVE_ACCOUNT");
+                        return Results.Content("INACTIVE_ACCOUNT", "text/plain");
                     }
                     else
                     {
@@ -56,7 +54,7 @@ namespace Questao5.Application.Handlers
                 }
                 else
                 {
-                    return Results.Content("INVALID_ACCOUNT");
+                    return Results.Content("INVALID_ACCOUNT", "text/plain");
                 }
 
                 return Results.Ok(mensagem);

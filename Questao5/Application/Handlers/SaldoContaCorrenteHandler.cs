@@ -7,12 +7,10 @@ namespace Questao5.Application.Handlers
 {
     public class SaldoContaCorrenteHandler : IRequestHandler<ConsultarSaldoContaCorrenteQuery, IResult>
     {
-        private readonly IMediator _mediator;
         private readonly IDatabaseBootstrap _databaseBootstrap;
 
-        public SaldoContaCorrenteHandler(IMediator mediator, IDatabaseBootstrap databaseBootstrap)
+        public SaldoContaCorrenteHandler(IDatabaseBootstrap databaseBootstrap)
         {
-            _mediator = mediator;
             _databaseBootstrap = databaseBootstrap;
         }
 
@@ -28,7 +26,7 @@ namespace Questao5.Application.Handlers
                 {
                     if (contaCorrente[0].Ativo != true)
                     {
-                        return Results.Content("INACTIVE_ACCOUNT");
+                        return Results.Content("INACTIVE_ACCOUNT","text/plain");
                     }
                     else
                     {
@@ -53,7 +51,7 @@ namespace Questao5.Application.Handlers
                 }
                 else
                 {
-                    return Results.Content("INVALID_ACCOUNT");
+                    return Results.Content("INVALID_ACCOUNT", "text/plain");
                 }
 
                 var retornoSaldo = new RetornoSaldo
