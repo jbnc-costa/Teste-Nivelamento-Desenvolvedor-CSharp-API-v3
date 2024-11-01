@@ -1,3 +1,4 @@
+using IdempotentAPI.Cache.DistributedCache.Extensions.DependencyInjection;
 using MediatR;
 using Questao5.Infrastructure.Sqlite;
 using System.Reflection;
@@ -16,6 +17,9 @@ builder.Services.AddSingleton<IDatabaseBootstrap, DatabaseBootstrap>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddIdempotentAPIUsingDistributedCache();
 
 var app = builder.Build();
 

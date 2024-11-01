@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using IdempotentAPI.Filters;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Questao5.Application.Commands.Requests;
 using Questao5.Application.Queries.Requests;
@@ -7,6 +8,9 @@ namespace Questao5.Infrastructure.Services.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    //[Idempotent(Enabled = true)]
     public class ContaCorrenteController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,6 +21,7 @@ namespace Questao5.Infrastructure.Services.Controllers
         }
 
         [HttpPost]
+        //[Idempotent(ExpireHours = 48)]
         public async Task<IActionResult> MovimentarContaCorrente([FromBody] MovimentarContaCorrenteRequest movimentarContaCorrenteRequest)
         {
             var movimentarContaCorrenteCommand = new MovimentarContaCorrenteCommand
@@ -32,6 +37,7 @@ namespace Questao5.Infrastructure.Services.Controllers
         }
 
         [HttpGet]
+        //[Idempotent(ExpireHours = 48)]
         public async Task<IActionResult> SaldoContaCorrente([FromQuery] int conta)
         {
             var query = new ConsultaSaldoContaCorrenteQuery(conta);
