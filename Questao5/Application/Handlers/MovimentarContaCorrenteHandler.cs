@@ -28,7 +28,7 @@ namespace Questao5.Application.Handlers
                     return Results.Content("INVALID_TYPE", "text/plain");
                 }
 
-                var contaCorrente = _databaseBootstrap.ConsultarContaCorrente(request.NumeroContaCorrente);
+                List<Contacorrente> contaCorrente = _databaseBootstrap.ConsultarContaCorrente(request.NumeroContaCorrente);
 
                 var mensagem = string.Empty;
 
